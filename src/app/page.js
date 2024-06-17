@@ -1,7 +1,9 @@
+import Header from "@/components/modules/Header/Header"
+
 export default function Home() {
   return (
-   <div className="font-poppins-medium">
-   ok
+   <div className="">
+   <Header/>
    </div>
   )
 }

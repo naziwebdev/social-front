@@ -18,6 +18,10 @@ module.exports = {
         "poppins-semiBold": ["poppins-semiBold"],
         "poppins-thin": ["poppins-thin"],
       },
+      screens: {
+        "xs": "550px",
+        "2xs": "400px",
+      },
     },
   },
   plugins: [],

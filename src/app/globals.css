@@ -4,7 +4,7 @@
 
 @layer base {
   @font-face {
-    font-family:poppins-black;
+    font-family: poppins-black;
     src: url(/fonts/Poppins/Poppins-Black.ttf) format(truetype);
   }
 
@@ -44,5 +44,16 @@
   @font-face {
     font-family: poppins-thin;
     src: url(/fonts/Poppins/Poppins-Thin.ttf) format(truetype);
+  }
+
+  *,*::before,*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #f4f4f5;
+    font-family:poppins-regular;
   }
 }
