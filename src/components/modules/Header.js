@@ -24,7 +24,7 @@ export default function Header() {
           +
         </button>
         <Image
-          className="w-[40px] h-[40px] xs:w-[60px] xs:h-[50px] rounded-full"
+          className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
           alt="avatar"
           width={60}
           height={50}
