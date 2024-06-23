@@ -46,7 +46,9 @@
     src: url(/fonts/Poppins/Poppins-Thin.ttf) format(truetype);
   }
 
-  *,*::before,*::after{
+  *,
+  *::before,
+  *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -54,6 +56,17 @@
 
   body {
     background-color: #f4f4f5;
-    font-family:poppins-regular;
+    font-family: poppins-regular;
+  }
+}
+
+@layer utilities {
+  .gradient {
+    background: linear-gradient(
+      to bottom,
+      transparent 20%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
   }
 }
