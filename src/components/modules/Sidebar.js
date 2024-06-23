@@ -12,7 +12,7 @@ import { TbSettings } from "react-icons/tb";
 
 export default function Sidebar() {
   return (
-    <div className="sticky left-0 top-0 w-[370px] px-2">
+    <div className="sticky left-0 top-5 w-[370px] px-2 h-full">
       <nav className="bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center gap-x-5 p-5">
           <Image
@@ -62,7 +62,7 @@ export default function Sidebar() {
           </li>
         </ul>
       </nav>
-      <button className="hidden md:flex justify-center items-center mt-4 bg-indigo-500 text-white w-full h-11 text-base md:text-lg  rounded-3xl">
+      <button className="flex justify-center items-center mt-4 bg-indigo-500 text-white w-full h-11 text-base md:text-lg  rounded-3xl">
         Create Post
       </button>
     </div>

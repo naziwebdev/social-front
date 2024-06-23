@@ -2,6 +2,8 @@ import Header from "@/components/modules/Header"
 import Sidebar from "@/components/modules/Sidebar"
 import HomeContent from "@/components/templates/Home/HomeContent"
 
+
+
 export default function Home() {
   return (
    <div>
