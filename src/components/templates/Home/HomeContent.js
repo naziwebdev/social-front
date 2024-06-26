@@ -4,7 +4,7 @@ import PostCard from "@/components/modules/PostCard";
 
 export default function HomeContent() {
   return (
-    <div className="w-1/2">
+    <div className="w-1/2 pe-2">
       <div className="flex items-center justify-between gap-x-4">
         <StoryBox
           href={"/images/story-1.jpg"}
@@ -45,12 +45,12 @@ export default function HomeContent() {
         </button>
       </div>
       <div className="flex flex-col items-center gap-y-4 mt-8 ">
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
       </div>
     </div>
   );
