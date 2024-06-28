@@ -11,7 +11,7 @@ export default function SmallSizeMenu() {
       <span className="absolute -top-10 left-1/2 -translate-x-1/2 w-20 xs:w-28 h-10 xs:h-14 bg-white rounded-t-full  shadow-purple-600 shadow-inner"></span>
       <ul className="w-full h-full flex items-center justify-around">
         <li>
-          <Link href={"/"}>
+          <Link href={"/requests"}>
             <FaUserFriends className="text-2xl 2xs:text-3xl" />
           </Link>
         </li>

@@ -1,7 +1,7 @@
 import MessageBox from "./MessageBox"
 import PopularePost from "./PopularePost"
 import PopulareUsers from "./PopulareUsers"
-import RequestsBox from "./RequestsBox"
+import RequestsBox from "../../modules/RequestsBox"
 
 export default function UtilsSidebar() {
   return (
