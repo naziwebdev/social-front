@@ -1,9 +1,9 @@
 import Image from "next/image";
 export default function RequestsBox() {
   return (
-    <div className="flex flex-col gap-y-3.5">
+    <div className="w-full flex flex-col gap-y-3.5">
       <p className="font-poppins-bold text-stone-500 mt-10 text-lg">Requests</p>
-      <div className="w-[370px] p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+      <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[60px] h-[60px] rounded-full"
@@ -28,7 +28,7 @@ export default function RequestsBox() {
           </button>
         </div>
       </div>
-      <div className="w-[370px] p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+      <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[60px] h-[60px] rounded-full"
@@ -53,7 +53,7 @@ export default function RequestsBox() {
           </button>
         </div>
       </div>
-      <div className="w-[370px] p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+      <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[60px] h-[60px] rounded-full"
@@ -78,7 +78,7 @@ export default function RequestsBox() {
           </button>
         </div>
       </div>
-      <div className="w-[370px] p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+      <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[60px] h-[60px] rounded-full"

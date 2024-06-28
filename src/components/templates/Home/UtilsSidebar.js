@@ -1,8 +1,15 @@
 import MessageBox from "./MessageBox"
+import PopularePost from "./PopularePost"
+import PopulareUsers from "./PopulareUsers"
+import RequestsBox from "./RequestsBox"
+
 export default function UtilsSidebar() {
   return (
-    <div>
+    <div className="hidden lg:block w-[270px] xl:w-[370px] me-2">
         <MessageBox/>
+        <PopularePost/>
+        <PopulareUsers/>
+        <RequestsBox/>
     </div>
   )
 }

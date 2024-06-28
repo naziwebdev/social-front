@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function PopulareUsers() {
   return (
-    <div className="w-[370px] mt-10 p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+    <div className="w-full mt-10 p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
     <p className="font-poppins-bold">Populare Users</p>
     <div className="flex items-center gap-x-5 p-5">
           <Image

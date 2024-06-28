@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function PopularePost() {
   return (
-    <div className="w-[370px] mt-10 p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+    <div className="w-full mt-10 p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
       <p className="font-poppins-bold">Populare Post</p>
       <div className="flex items-center gap-x-5 pt-5 cursor-pointer hover:bg-zinc-50 px-2">
         <Image

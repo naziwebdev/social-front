@@ -4,8 +4,8 @@ import PostCard from "@/components/modules/PostCard";
 
 export default function HomeContent() {
   return (
-    <div className="w-1/2 pe-2">
-      <div className="flex items-center justify-between gap-x-4">
+    <div className="flex-1 xl:w-1/2  pe-2">
+      <div className="flex flex-wrap xs:flex-nowrap items-center justify-center xs:justify-between gap-2 sm:gap-x-4">
         <StoryBox
           href={"/images/story-1.jpg"}
           avatar={"/images/profile-13.jpg"}
@@ -40,11 +40,11 @@ export default function HomeContent() {
           placeholder="what's on your mind, peyman ?"
           className="w-full outline-none"
         />
-        <button className="flex justify-center items-center  bg-purple-700 text-white w-24 h-8 text-base md:text-lg  rounded-3xl">
+        <button className="flex justify-center items-center  bg-purple-700 text-white w-28 2xs:w-24 h-8 text-base md:text-lg  rounded-3xl">
           Post
         </button>
       </div>
-      <div className="flex flex-col items-center gap-y-4 mt-8 ">
+      <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-8 ">
         <PostCard />
         <PostCard />
         <PostCard />

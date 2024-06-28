@@ -57,6 +57,7 @@
   body {
     background-color: #f4f4f5;
     font-family: poppins-regular;
+    overflow-x: hidden;
   }
 }
 

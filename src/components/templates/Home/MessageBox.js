@@ -4,7 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 
 export default function MessageBox() {
   return (
-    <div className="w-[370px] me-2 p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
+    <div className="w-full p-5 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
       <div className="flex items-center justify-between">
         <p className="font-poppins-bold">Messages</p>
         <FaPenToSquare className="text-xl" />
