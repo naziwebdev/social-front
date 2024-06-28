@@ -1,4 +1,4 @@
-import MessageBox from "./MessageBox"
+import MessageBox from "../../modules/MessageBox"
 import PopularePost from "./PopularePost"
 import PopulareUsers from "./PopulareUsers"
 import RequestsBox from "../../modules/RequestsBox"

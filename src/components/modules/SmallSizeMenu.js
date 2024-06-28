@@ -16,7 +16,7 @@ export default function SmallSizeMenu() {
           </Link>
         </li>
         <li>
-          <Link href={"/"}>
+          <Link href={"/messages"}>
             <AiFillMessage className="text-2xl 2xs:text-3xl" />
           </Link>
         </li>

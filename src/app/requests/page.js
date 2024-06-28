@@ -7,9 +7,8 @@ export default function page() {
     <div className="pb-32">
       <Header />
       <div className="px-5 sm:px-10">
-        <RequestsBox/>
+        <RequestsBox />
       </div>
-      
       <SmallSizeMenu />
     </div>
   );
