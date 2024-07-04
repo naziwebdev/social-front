@@ -3,20 +3,20 @@ import SmallSizeMenu from "@/components/modules/SmallSizeMenu";
 
 export default function page() {
   return (
-    <div className="flex justify-between items-center gap-32 p-10 w-full h-dvh bg-white">
-      <div className="w-1/3">
-        <h2 className="text-5xl pb-10 font-poppins-medium text-indigo-400">
+    <div className="flex flex-col xs:flex-row justify-between gap-10 lg:gap-32 p-6 sm:p-10 w-full bg-white">
+      <div className="w-full xs:w-1/3">
+        <h2 className="text-3xl lg:text-5xl pb-5 lg:pb-10 font-poppins-medium text-indigo-400">
           File upload
         </h2>
-        <div className="flex flex-col justify-center items-center gap-y-5 p-10 py-16 w-full border-[3px] border-dashed border-indigo-500 rounded-xl bg-indigo-50">
+        <div className="flex flex-col justify-center items-center gap-y-5 p-5 lg:p-10 py-16 w-full border-[3px] border-dashed border-indigo-500 rounded-xl bg-indigo-50">
           <FaUpload className="text-8xl text-indigo-400" />
-          <p className="font-poppins-regular text-3xl text-indigo-400">
+          <p className="font-poppins-regular text-3xl text-indigo-400 p-2">
             Upload a file
           </p>
-          <div className="relative w-2/3 h-14 rounded-xl bg-indigo-400">
+          <div className="relative w-full lg:w-2/3 h-14 rounded-xl bg-indigo-400">
             <label
               htmlFor="files"
-              className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 text-white font-poppins-bold text-2xl "
+              className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 text-white font-poppins-bold text-2xl py-3"
             >
               Browse file
             </label>
@@ -28,8 +28,8 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div className="flex-1">
-        <h2 className="text-5xl pb-8 font-poppins-medium text-indigo-400">
+      <div className="flex-1 pb-10">
+        <h2 className="text-3xl lg:text-5xl pb-5 lg:pb-8 font-poppins-medium text-indigo-400">
           Post details
         </h2>
         <div className="w-full">
