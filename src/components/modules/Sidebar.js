@@ -44,19 +44,19 @@ export default function Sidebar() {
           </li>
           <li className="flex gap-x-4 items-center justify-center xs:justify-normal  xs:ps-5 md:ps-20 py-3 hover:bg-zinc-100">
             <TbBell className="text-2xl" />
-            <Link href="/" className="hidden xs:block">
+            <Link href="/requests" className="hidden xs:block">
               Notifications
             </Link>
           </li>
           <li className="flex gap-x-4 items-center justify-center xs:justify-normal xs:ps-5 md:ps-20 py-3 hover:bg-zinc-100">
             <BiEnvelope className="text-2xl" />
-            <Link href="/" className="hidden xs:block">
+            <Link href="/messages" className="hidden xs:block">
               Messages
             </Link>
           </li>
           <li className="flex gap-x-4 items-center justify-center xs:justify-normal xs:ps-5 md:ps-20 py-3 hover:bg-zinc-100">
             <BiBookmark className="text-2xl" />
-            <Link href="/" className="hidden xs:block">
+            <Link href="/bookmarks" className="hidden xs:block">
               Bookmarks
             </Link>
           </li>

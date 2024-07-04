@@ -21,7 +21,7 @@ export default function Header() {
           <Link href={"/postUpload"}>Create</Link>
         </button>
         <button className="flex md:hidden justify-center items-center bg-indigo-500 text-white w-7 h-7 xs:w-10 xs:h-10 text-xl xs:text-2xl  rounded-full">
-          +
+        <Link href={"/postUpload"}>+</Link>
         </button>
         <Image
           className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
