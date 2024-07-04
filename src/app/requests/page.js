@@ -9,7 +9,7 @@ export default function page() {
       <div className="px-5 sm:px-10">
         <RequestsBox />
       </div>
-      <SmallSizeMenu />
+      <SmallSizeMenu isActiveLargeSize={false}/>
     </div>
   );
 }

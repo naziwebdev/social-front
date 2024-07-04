@@ -7,7 +7,7 @@ export default function page() {
     <div>
         <Header/>
         <MessageBox/>
-        <SmallSizeMenu/>
+        <SmallSizeMenu isActiveLargeSize={false}/>
     </div>
   )
 }

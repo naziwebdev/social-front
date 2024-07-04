@@ -15,7 +15,7 @@ export default function Home() {
      <HomeContent/>
      <UtilsSidebar/>
     </main>
-    <SmallSizeMenu/>
+    <SmallSizeMenu isActiveLargeSize={false}/>
     <Footer/>
    </div>
   )

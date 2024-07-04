@@ -18,7 +18,7 @@ export default function Header() {
       </div>
       <div className="flex items-center gap-x-4">
         <button className="hidden md:flex justify-center items-center bg-indigo-500 text-white w-28 h-11 text-base md:text-lg  rounded-3xl">
-          Create
+          <Link href={"/postUpload"}>Create</Link>
         </button>
         <button className="flex md:hidden justify-center items-center bg-indigo-500 text-white w-7 h-7 xs:w-10 xs:h-10 text-xl xs:text-2xl  rounded-full">
           +
