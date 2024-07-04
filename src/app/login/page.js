@@ -23,7 +23,7 @@ export default function page() {
                 className="w-full md:w-3/4 p-2.5 rounded-lg bg-indigo-200 border-2 border-black placeholder:text-zinc-500 placeholder:font-poppins-semiBold placeholder:text-sm" />
             </div>
             <p className="font-poppins-regular text-center xs:text-start text-white xs:text-gray-700">
-          Forget the password ? <Link href="/login" className="text-sky-500 xs:text-indigo-800 font-poppins-bold">recovery</Link>
+          Forget the password ? <Link href="/recovery" className="text-sky-500 xs:text-indigo-800 font-poppins-bold">recovery</Link>
         </p>
             <button className="w-full md:w-3/4 mt-4 p-3 flex items-center justify-center rounded-md bg-indigo-600 text-white">
                 Continue
