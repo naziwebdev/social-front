@@ -4,7 +4,7 @@ export default function PeapleToFollow() {
   return (
     <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
       <p className="font-poppins-bold text-lg pb-3">People to follow</p>
-      <div className="flex items-center justify-between p-3">
+      <div className="flex flex-wrap gap-3 items-center  justify-between pt-4 md:p-3">
         <div className="flex items-center gap-x-5 ">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
@@ -14,7 +14,7 @@ export default function PeapleToFollow() {
             src="/images/profile-3.jpg"
           />
           <div className="">
-            <p className="flex  items-center gap-x-2 font-poppins-bold">
+            <p className="flex items-center gap-x-2 font-poppins-bold text-sm lg:text-base">
               Peyman Ahmadi
               <Image
                 className=" w-5 h-5 "
@@ -32,7 +32,7 @@ export default function PeapleToFollow() {
           Follow
         </button>
       </div>
-      <div className="flex items-center justify-between p-3">
+      <div className="flex flex-wrap gap-3 items-center justify-between pt-4  md:p-3">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
@@ -42,7 +42,7 @@ export default function PeapleToFollow() {
             src="/images/profile-6.jpg"
           />
           <div className="">
-            <p className="flex  items-center gap-x-2 font-poppins-bold">
+            <p className="flex  items-center gap-x-2 font-poppins-bold text-sm lg:text-base">
               Peyman Ahmadi
               <Image
                 className=" w-5 h-5 "
@@ -60,7 +60,7 @@ export default function PeapleToFollow() {
           Follow
         </button>
       </div>
-      <div className="flex items-center justify-between p-3">
+      <div className="flex flex-wrap gap-3 items-center justify-between pt-4 md:p-3">
         <div className="flex items-center gap-x-5">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
@@ -70,7 +70,7 @@ export default function PeapleToFollow() {
             src="/images/profile-1.jpg"
           />
           <div className="">
-            <p className="flex  items-center gap-x-2 font-poppins-bold">
+            <p className="flex  items-center gap-x-2 font-poppins-bold text-sm lg:text-base">
               Peyman Ahmadi
               <Image
                 className=" w-5 h-5 "

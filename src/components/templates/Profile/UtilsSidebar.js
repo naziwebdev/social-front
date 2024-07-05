@@ -4,7 +4,7 @@ import Happening from "./Happening"
 
 export default function UtilsSidebar() {
   return (
-    <div className='flex-1'>
+    <div className='flex-1 hidden sm:block'>
         <PeapleToFollow/>
         <TrendingBox/>
         <Happening/>
