@@ -74,7 +74,7 @@ export default function Sidebar() {
           </li>
           <li className="flex gap-x-4 items-center justify-center xs:justify-normal xs:ps-5 md:ps-20 py-3 hover:bg-zinc-100">
             <TbSettings className="text-2xl" />
-            <Link href="/" className="hidden xs:block">
+            <Link href="/profileUpdate/nazi" className="hidden xs:block">
               Settings
             </Link>
           </li>
