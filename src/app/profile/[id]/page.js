@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="relative">
       <Header />
-      <main className="flex justify-between gap-x-3 px-1 pb-8 mt-6">
+      <main className="flex justify-between gap-x-3 px-1 pb-6 mt-6">
         <ProfileContent />
         <UtilsSidebar/>
       </main>

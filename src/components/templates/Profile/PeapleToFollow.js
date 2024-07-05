@@ -3,9 +3,9 @@ import Image from "next/image";
 export default function PeapleToFollow() {
   return (
     <div className="w-full p-4 bg-white shadow-md shadow-zinc-200/50 rounded-lg">
-      <p className="font-poppins-bold text-lg pb-2">Populare Users</p>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-x-5 p-4">
+      <p className="font-poppins-bold text-lg pb-3">People to follow</p>
+      <div className="flex items-center justify-between p-3">
+        <div className="flex items-center gap-x-5 ">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
             alt="avatar"
@@ -32,8 +32,8 @@ export default function PeapleToFollow() {
           Follow
         </button>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-x-5 p-4">
+      <div className="flex items-center justify-between p-3">
+        <div className="flex items-center gap-x-5">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
             alt="avatar"
@@ -60,8 +60,8 @@ export default function PeapleToFollow() {
           Follow
         </button>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-x-5 p-4">
+      <div className="flex items-center justify-between p-3">
+        <div className="flex items-center gap-x-5">
           <Image
             className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
             alt="avatar"
