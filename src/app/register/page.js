@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerValidator from "@/validations/register";
 import swal from "sweetalert";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+
+  const router = useRouter()
+
   const {
     register,
     reset,
@@ -25,7 +28,7 @@ export default function page() {
 
   const registerHandle = async (data, event) => {
     event.preventDefault();
-    const res = await fetch("http://localhost:4001/auth/register", {
+    const res = await fetch("http://localhost:4002/auth/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -44,11 +47,11 @@ export default function page() {
       swal({
         title: "با موفقیت ثبت نام شد",
         icon: "success",
-        buttons: "بستن",
+        buttons: "خانه",
       }).then((value) => {
         if (value) {
           reset();
-          redirect("/");
+          router.replace("/");
         }
       });
     } else {

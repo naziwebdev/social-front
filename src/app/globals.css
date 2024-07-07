@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.swal-footer {
+  text-align: center;
+}
+
 @layer base {
   @font-face {
     font-family: poppins-black;
