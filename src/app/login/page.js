@@ -8,8 +8,7 @@ import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 
 export default function page() {
-
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     register,
@@ -35,7 +34,7 @@ export default function page() {
         email: data.email,
         password: data.password,
       }),
-      credentials: 'include'
+      credentials: "include",
     });
 
     if (res.status === 200) {
@@ -83,6 +82,9 @@ export default function page() {
               placeholder="enter the your email"
               className="w-full md:w-3/4 p-2.5 rounded-lg bg-indigo-200 border-2 border-black placeholder:text-zinc-500 placeholder:font-poppins-semiBold placeholder:text-sm"
             />
+            <span className="pt-1.5 text-sm text-red-600">
+              {errors.email && errors.email.message}
+            </span>
           </div>
           <div className="flex flex-col gap-y-1.5">
             <label htmlFor="password" className="font-poppins-medium text-lg">
@@ -95,6 +97,9 @@ export default function page() {
               placeholder="enter the your password"
               className="w-full md:w-3/4 p-2.5 rounded-lg bg-indigo-200 border-2 border-black placeholder:text-zinc-500 placeholder:font-poppins-semiBold placeholder:text-sm"
             />
+            <span className="pt-1.5 text-sm text-red-600">
+              {errors.password && errors.password.message}
+            </span>
           </div>
           <p className="font-poppins-regular text-center xs:text-start text-white xs:text-gray-700">
             Forget the password ?{" "}

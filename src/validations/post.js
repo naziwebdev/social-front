@@ -5,7 +5,7 @@ const postValidator = yup.object().shape({
     .string()
     .required("متن را به وارد کنید")
     .min(3, "  باید حداقل ۶ کارکتر باشد"),
-  hashtags: yup.array().optional(),
+  hashtags: yup.string().optional(),
 });
 
 export default postValidator;
