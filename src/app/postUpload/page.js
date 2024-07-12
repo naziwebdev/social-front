@@ -1,5 +1,10 @@
+"use client"
+
 import { FaUpload } from "react-icons/fa";
 import SmallSizeMenu from "@/components/modules/SmallSizeMenu";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 
 export default function page() {
   return (
@@ -16,7 +21,7 @@ export default function page() {
           <div className="relative w-full lg:w-2/3 h-14 rounded-xl bg-indigo-400">
             <label
               htmlFor="files"
-              className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 text-white font-poppins-bold text-2xl py-3"
+              className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20 cursor-pointer text-white font-poppins-bold text-2xl py-3"
             >
               Browse file
             </label>

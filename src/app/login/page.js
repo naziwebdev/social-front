@@ -35,6 +35,7 @@ export default function page() {
         email: data.email,
         password: data.password,
       }),
+      credentials: 'include'
     });
 
     if (res.status === 200) {
