@@ -10,14 +10,13 @@ import { FaLock } from "react-icons/fa";
 export default function profileContent({ pageID }) {
   const [pageInfo, setPageInfo] = useState({});
 
-
   const getpage = async () => {
     const res = await fetch(`http://localhost:4002/page/${pageID}`, {
       method: "GET",
       credentials: "include",
     });
     const data = await res.json();
-      setPageInfo(data)
+    setPageInfo(data);
   };
 
   useEffect(() => {
@@ -34,6 +33,10 @@ export default function profileContent({ pageID }) {
         title: "با موفقیت فالو شد",
         icon: "success",
         buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+          location.reload();
+        }
       });
     } else {
       swal({
@@ -50,11 +53,14 @@ export default function profileContent({ pageID }) {
       credentials: "include",
     });
     if (res.status === 200) {
-      setISFollow(true);
       swal({
         title: "با موفقیت آنفالو شد",
         icon: "success",
         buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+          location.reload();
+        }
       });
     } else {
       swal({
@@ -76,21 +82,21 @@ export default function profileContent({ pageID }) {
           className="w-full h-[280px] rounded-t-xl object-cover"
         />
         <div className="relative p-5">
-          {pageInfo.page?.avatar ?
-          <img
-            src={`http://localhost:4002/${pageInfo.page?.avatar}`}
-            alt="avatar"
-            className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[120px] md:h-[115px] rounded-full object-cover"
-          />
-          : 
-          <Image
-          src="/images/avatar.png"
-          alt="avatar"
-          width={500}
-          height={500}
-          className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[130px] md:h-[120px] rounded-full object-cover"
-          />
-          }
+          {pageInfo.page?.avatar ? (
+            <img
+              src={`http://localhost:4002/${pageInfo.page?.avatar}`}
+              alt="avatar"
+              className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[120px] md:h-[115px] rounded-full object-cover"
+            />
+          ) : (
+            <Image
+              src="/images/avatar.png"
+              alt="avatar"
+              width={500}
+              height={500}
+              className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[130px] md:h-[120px] rounded-full object-cover"
+            />
+          )}
           <h2 className="font-poppins-bold text-xl 2xs:text-2xl pt-10 md:pt-12">
             {pageInfo.page?.name}
           </h2>
@@ -108,7 +114,7 @@ export default function profileContent({ pageID }) {
                 Manage
               </button>
             )}
-            {pageInfo.hasAccess ? (
+            {pageInfo.haveFollowed ? (
               <button
                 onClick={unfollowHandler}
                 className="bg-blue-400 h-10 md:h-12 w-24 md:w-28 rounded-3xl text-white p-2  text-sm font-poppins-semiBold"
@@ -178,8 +184,9 @@ export default function profileContent({ pageID }) {
           </div>
         </>
       ) : (
-        <div className="flex gap-x-2 mb-28 items-center py-10 font-poppins-xBold text-xl justify-center my-6 p-5 bg-white ">the page is private
-        <FaLock className="text-3xl -order-1"/>
+        <div className="flex gap-x-2 mb-28 items-center py-10 font-poppins-xBold text-xl justify-center my-6 p-5 bg-white ">
+          the page is private
+          <FaLock className="text-3xl -order-1" />
         </div>
       )}
     </div>
