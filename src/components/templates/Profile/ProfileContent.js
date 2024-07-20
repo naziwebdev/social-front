@@ -3,9 +3,9 @@ import PostCard from "@/components/modules/PostCard";
 import Image from "next/image";
 import Link from "next/link";
 import { TbWorld } from "react-icons/tb";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
+import { FaLock } from "react-icons/fa";
 
 export default function profileContent({ pageID }) {
   const [pageInfo, setPageInfo] = useState({});
@@ -17,9 +17,7 @@ export default function profileContent({ pageID }) {
       credentials: "include",
     });
     const data = await res.json();
-    if (res.status === 200) {
-      setPageInfo(data);
-    }
+      setPageInfo(data)
   };
 
   useEffect(() => {
@@ -78,11 +76,21 @@ export default function profileContent({ pageID }) {
           className="w-full h-[280px] rounded-t-xl object-cover"
         />
         <div className="relative p-5">
+          {pageInfo.page?.avatar ?
           <img
             src={`http://localhost:4002/${pageInfo.page?.avatar}`}
             alt="avatar"
             className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[120px] md:h-[115px] rounded-full object-cover"
           />
+          : 
+          <Image
+          src="/images/avatar.png"
+          alt="avatar"
+          width={500}
+          height={500}
+          className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[130px] md:h-[120px] rounded-full object-cover"
+          />
+          }
           <h2 className="font-poppins-bold text-xl 2xs:text-2xl pt-10 md:pt-12">
             {pageInfo.page?.name}
           </h2>
@@ -146,22 +154,34 @@ export default function profileContent({ pageID }) {
           </button>
         </div>
       </div>
-      <div className="flex items-center justify-around bg-white my-6 pt-3 pb-3 border-b-[6px] border-zinc-300 rounded-xl shadow-md shadow-zinc-200/50 ">
-        <span
-          className="relative font-poppins-semiBold before:content-[''] before:absolute before:-left-3 2xs:before:-left-10 lg:before:-left-20
+      {pageInfo.hasAccessPage === true ? (
+        <>
+          <div className="flex items-center justify-around bg-white my-6 pt-3 pb-3 border-b-[6px] border-zinc-300 rounded-xl shadow-md shadow-zinc-200/50 ">
+            <span
+              className="relative font-poppins-semiBold before:content-[''] before:absolute before:-left-3 2xs:before:-left-10 lg:before:-left-20
         before:-bottom-4 before:w-14 2xs:before:w-28 lg:before:w-48 before:h-1 before:z-10 before:bg-purple-600 cursor-pointer"
-        >
-          Post
-        </span>
-        <span className="cursor-pointer">Reels</span>
-        <span className="cursor-pointer">Repsts</span>
-      </div>
+            >
+              Post
+            </span>
+            <span className="cursor-pointer">Reels</span>
+            <span className="cursor-pointer">Repsts</span>
+          </div>
 
-      <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-5">
-        {pageInfo.postsWithLikes?.map((item) => (
-          <PostCard key={item._id} avatar={pageInfo.page?.avatar} post={item} />
-        ))}
-      </div>
+          <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-5">
+            {pageInfo.postsWithLikes?.map((item) => (
+              <PostCard
+                key={item._id}
+                avatar={pageInfo.page?.avatar}
+                post={item}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="flex gap-x-2 mb-28 items-center py-10 font-poppins-xBold text-xl justify-center my-6 p-5 bg-white ">the page is private
+        <FaLock className="text-3xl -order-1"/>
+        </div>
+      )}
     </div>
   );
 }
