@@ -45,6 +45,10 @@ export default function page() {
           title: "پست با موفقیت افزوده شد",
           icon: "success",
           buttons: "بستن",
+        }).then((value) => {
+          if (value) {
+            reset();
+          }
         });
       } else if (res.status === 403) {
         swal({

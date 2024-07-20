@@ -1,37 +1,71 @@
+"use client";
 import Image from "next/image";
 
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiShare2 } from "react-icons/fi";
 
-export default function PostCard() {
+export default function PostCard({ post, avatar }) {
+  const likeHandler = async (postID) => {
+    const res = await fetch(`http://localhost:4002/post/like`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ postID }),
+    });
+  };
+
+  const dislikeHandler = async (postID) => {
+    const res = await fetch(`http://localhost:4002/post/dislike`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ postID }),
+    });
+  };
+
   return (
     <div className="overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
       <div className="flex items-center gap-x-5">
-        <Image
-          className="w-[40px] h-[40px] rounded-full"
+        <img
+          className="w-[40px] h-[40px] rounded-full object-cover"
           alt="avatar"
-          width={60}
-          height={55}
-          src="/images/profile-2.jpg"
+          src={`http://localhost:4002/${avatar}`}
         />
         <div className="">
-          <p className="font-poppins-medium text-sm xs:text-base">Lena Ms'Queen</p>
-          <p className="text-[.65rem] xs:text-xs text-zinc-500 xs:pt-1">Dubai , 6 Minuts Ago</p>
+          <p className="font-poppins-medium text-sm xs:text-base">
+            {post?.user?.name}
+          </p>
+          <p className="text-[.65rem] xs:text-xs text-zinc-500 xs:pt-1">
+            Dubai , 6 Minuts Ago
+          </p>
         </div>
       </div>
-      <Image
-        className="w-full h-[280px] 2xs:h-[300px] xs:h-[400px] my-4 rounded-xl"
+      <img
+        className="w-full h-[280px] 2xs:h-[300px] xs:h-[400px] my-4 rounded-xl object-cover"
         alt="post"
-        width={1000}
-        height={1000}
-        src="/images/feed-1.jpg"
+        src={`http://localhost:4002/${post?.media?.path}`}
       />
       <div className="flex items-center justify-between px-2">
         <div className="flex items-center gap-x-2 xs:gap-x-4">
-          <FaRegHeart className="text-xl xs:text-2xl cursor-pointer" />
+          {!post?.hasLike ? (
+            <FaRegHeart
+              onClick={() => likeHandler(post._id)}
+              className="text-xl xs:text-2xl cursor-pointer"
+            />
+          ) : (
+            <FaHeart
+              onClick={() => dislikeHandler(post._id)}
+              className="text-xl xs:text-2xl cursor-pointer text-red-500"
+            />
+          )}
           <FaRegComment className="text-xl xs:text-2xl cursor-pointer" />
           <FiShare2 className="text-xl xs:text-2xl cursor-pointer" />
         </div>
@@ -75,9 +109,11 @@ export default function PostCard() {
           and <span className="font-poppins-bold">2,923 others</span>
         </p>
       </div>
-      <p className="font-poppins-semiBold mt-4 text-sm xs:text-base">Lena Ms'Queen</p>
+      <p className="mt-4 text-sm xs:text-base text-blue-700">
+        {post?.hashtags && post.hashtags.map((item) => `#${item}`)}
+      </p>
       <p className="text-zinc-700 mt-2 text-sm xs:text-base">
-        description place lorem ipsum text for test
+        {post?.description}
       </p>
       <p className="text-stone-400 mt-1.5 text-sm cursor-pointer">
         View all 270 comments ...

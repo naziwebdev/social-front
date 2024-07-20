@@ -6,6 +6,7 @@ import SmallSizeMenu from "@/components/modules/SmallSizeMenu";
 export default function Home({params}) {
 
 
+
   return (
     <div className="relative">
       <Header />

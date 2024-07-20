@@ -78,30 +78,28 @@ export default function profileContent({ pageID }) {
           className="w-full h-[280px] rounded-t-xl object-cover"
         />
         <div className="relative p-5">
-          <Image
-            src="/images/profile-10.jpg"
+          <img
+            src={`http://localhost:4002/${pageInfo.page?.avatar}`}
             alt="avatar"
-            width={500}
-            height={500}
-            className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[120px] md:h-[115px] rounded-full"
+            className="absolute left-6 -top-16 w-[110px] h-[105px] md:w-[120px] md:h-[115px] rounded-full object-cover"
           />
           <h2 className="font-poppins-bold text-xl 2xs:text-2xl pt-10 md:pt-12">
-            Nazi Rastegar
+            {pageInfo.page?.name}
           </h2>
-          <p className="font-poppins-regular text-stone-600 pt-1">@nazi777</p>
+          <p className="font-poppins-regular text-stone-600 pt-1">
+            @ {pageInfo.page?.name}
+          </p>
         </div>
         <div className="flex justify-between items-center gap-x-5 lg:gap-x-36 p-5">
           <p className="md:text-lg text-stone-700 font-poppins-regular">
-            Lorem ipsum dolor sit amet, consectetur{" "}
-            <span className="font-poppins-semiBold text-purple-700">
-              @nazi777
-            </span>{" "}
-            elit . Est sint molestias eligendi.
+            {pageInfo?.page?.biogeraphy}
           </p>
           <div className="flex flex-wrap xs:flex-nowrap  items-center gap-2">
-            <button className="bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold">
-              Manage
-            </button>
+            {pageInfo?.ownPage && (
+              <button className="bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold">
+                Manage
+              </button>
+            )}
             {pageInfo.hasAccess ? (
               <button
                 onClick={unfollowHandler}
@@ -126,12 +124,16 @@ export default function profileContent({ pageID }) {
           </Link>
         </div>
         <div className="p-5 flex items-center gap-x-5">
-          <p className="text-stone-600 md:text-lg">
-            <span className="font-poppins-bold text-black md:text-xl">49</span>{" "}
+          <p className="text-stone-600 md:text-lg cursor-pointer">
+            <span className="font-poppins-bold text-black md:text-xl">
+              {pageInfo.followers?.length}
+            </span>{" "}
             Followers
           </p>
-          <p className="text-stone-600 md:text-lg">
-            <span className="font-poppins-bold text-black md:text-xl">49</span>{" "}
+          <p className="text-stone-600 md:text-lg cursor-pointer">
+            <span className="font-poppins-bold text-black md:text-xl">
+              {pageInfo.following?.length}
+            </span>{" "}
             Following
           </p>
         </div>
@@ -156,12 +158,9 @@ export default function profileContent({ pageID }) {
       </div>
 
       <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-5">
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {pageInfo.postsWithLikes?.map((item) => (
+          <PostCard key={item._id} avatar={pageInfo.page?.avatar} post={item} />
+        ))}
       </div>
     </div>
   );
