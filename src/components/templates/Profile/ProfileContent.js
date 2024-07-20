@@ -6,9 +6,20 @@ import { TbWorld } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { FaLock } from "react-icons/fa";
+import Modal from "@/components/modules/Modal";
 
 export default function profileContent({ pageID }) {
   const [pageInfo, setPageInfo] = useState({});
+  const [openFollowModal, setOpenFollowModal] = useState(false);
+  const [openUnfollowModal, setOpenUnfollowModal] = useState(false);
+
+  const closeFollowModal = () => {
+    setOpenFollowModal(false);
+  };
+
+  const closeUnfollowModal = () => {
+    setOpenUnfollowModal(false);
+  };
 
   const getpage = async () => {
     const res = await fetch(`http://localhost:4002/page/${pageID}`, {
@@ -138,13 +149,19 @@ export default function profileContent({ pageID }) {
           </Link>
         </div>
         <div className="p-5 flex items-center gap-x-5">
-          <p className="text-stone-600 md:text-lg cursor-pointer">
+          <p
+            onClick={() => setOpenFollowModal(true)}
+            className="text-stone-600 md:text-lg cursor-pointer"
+          >
             <span className="font-poppins-bold text-black md:text-xl">
               {pageInfo.followers?.length}
             </span>{" "}
             Followers
           </p>
-          <p className="text-stone-600 md:text-lg cursor-pointer">
+          <p
+            onClick={() => setOpenUnfollowModal(true)}
+            className="text-stone-600 md:text-lg cursor-pointer"
+          >
             <span className="font-poppins-bold text-black md:text-xl">
               {pageInfo.following?.length}
             </span>{" "}
@@ -188,6 +205,82 @@ export default function profileContent({ pageID }) {
           the page is private
           <FaLock className="text-3xl -order-1" />
         </div>
+      )}
+      {openFollowModal && pageInfo.hasAccessPage && (
+        <Modal onClose={closeFollowModal}>
+          <h1 className="text-xl font-poppins-bold border-b-2 pb-2 border-black">
+            followers list :
+          </h1>
+
+          {pageInfo.followers.length > 0 ? (
+            pageInfo.followers.map((item) => (
+              <Link
+                href={`/profile/${item._id}`}
+                className="flex items-center gap-x-4  pt-8"
+              >
+                {pageInfo.page?.avatar ? (
+                  <img
+                    src={`http://localhost:4002/${pageInfo.page?.avatar}`}
+                    alt="avatar"
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src="/images/avatar.png"
+                    alt="avatar"
+                    width={500}
+                    height={500}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                )}
+                <div>
+                  <p className="text-xl font-poppins-medium">{item.name}</p>
+                  <p className="">@{item.username}</p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-center pt-8">yet no have followers</p>
+          )}
+        </Modal>
+      )}
+      {openUnfollowModal && pageInfo.hasAccessPage && (
+        <Modal onClose={closeUnfollowModal}>
+          <h1 className="text-xl font-poppins-bold border-b-2 pb-2 border-black">
+            following list :
+          </h1>
+
+          {pageInfo.following.length > 0 ? (
+            pageInfo.following.map((item) => (
+              <Link
+                href={`/profile/${item._id}`}
+                className="flex items-center gap-x-4  pt-8"
+              >
+                {pageInfo.page?.avatar ? (
+                  <img
+                    src={`http://localhost:4002/${pageInfo.page?.avatar}`}
+                    alt="avatar"
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src="/images/avatar.png"
+                    alt="avatar"
+                    width={500}
+                    height={500}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                )}
+                <div>
+                  <p className="text-xl font-poppins-medium">{item.name}</p>
+                  <p className="">@{item.username}</p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-center pt-8">yet no have following</p>
+          )}
+        </Modal>
       )}
     </div>
   );
