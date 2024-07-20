@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { FaLock } from "react-icons/fa";
 import Modal from "@/components/modules/Modal";
+import BookmarkBox from "../Bookmarks/BookmarkBox";
 
 export default function profileContent({ pageID }) {
   const [pageInfo, setPageInfo] = useState({});
   const [openFollowModal, setOpenFollowModal] = useState(false);
   const [openUnfollowModal, setOpenUnfollowModal] = useState(false);
+  const [btnShowContent, setBtnShowContent] = useState("post");
 
   const closeFollowModal = () => {
     setOpenFollowModal(false);
@@ -168,36 +170,59 @@ export default function profileContent({ pageID }) {
             Following
           </p>
         </div>
-        <div className="flex justify-between gap-x-4 items-center mx-5 bg-red-50 p-3">
-          <p className="text-red-500 font-poppins-regular text-sm md:text-base">
-            This account nedd to get verificated
-          </p>
-          <button className="bg-red-500 rounded-md text-xs lg:text-base text-white flex justify-center items-center p-2">
-            Send verification
-          </button>
-        </div>
+        {pageInfo.page?.isVerified === false && pageInfo.ownPage === true && (
+          <div className="flex justify-between gap-x-4 items-center mx-5 bg-red-50 p-3">
+            <p className="text-red-500 font-poppins-regular text-sm md:text-base">
+              This account nedd to get verificated
+            </p>
+            <button className="bg-red-500 rounded-md text-xs lg:text-base text-white flex justify-center items-center p-2">
+              Send verification
+            </button>
+          </div>
+        )}
       </div>
       {pageInfo.hasAccessPage === true ? (
         <>
           <div className="flex items-center justify-around bg-white my-6 pt-3 pb-3 border-b-[6px] border-zinc-300 rounded-xl shadow-md shadow-zinc-200/50 ">
             <span
-              className="relative font-poppins-semiBold before:content-[''] before:absolute before:-left-3 2xs:before:-left-10 lg:before:-left-20
-        before:-bottom-4 before:w-14 2xs:before:w-28 lg:before:w-48 before:h-1 before:z-10 before:bg-purple-600 cursor-pointer"
+              onClick={() => setBtnShowContent("post")}
+              className={`cursor-pointer ${btnShowContent === 'post' && 'marker'}`}
             >
               Post
             </span>
-            <span className="cursor-pointer">Reels</span>
-            <span className="cursor-pointer">Repsts</span>
+            <span
+              onClick={() => setBtnShowContent("reels")}
+              className={`cursor-pointer ${btnShowContent === 'reels' && 'marker'}`}
+            >
+              Reels
+            </span>
+            <span
+              onClick={() => setBtnShowContent("repost")}
+              className={`cursor-pointer ${btnShowContent === 'repost' && 'marker'}`}
+            >
+              Repsts
+            </span>
           </div>
 
           <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-5">
-            {pageInfo.postsWithLikes?.map((item) => (
-              <PostCard
-                key={item._id}
-                avatar={pageInfo.page?.avatar}
-                post={item}
-              />
-            ))}
+            {btnShowContent === "post" ? (
+              pageInfo.postsWithLikes?.map((item) => (
+                <PostCard
+                  key={item._id}
+                  avatar={pageInfo.page?.avatar}
+                  post={item}
+                />
+              ))
+            ) : btnShowContent === "reels" ? (
+              <div className="flex justify-center flex-wrap gap-4">
+                <BookmarkBox imgSrc={"/images/feed-1.jpg"} />
+                <BookmarkBox imgSrc={"/images/feed-2.jpg"} />
+                <BookmarkBox imgSrc={"/images/feed-3.jpg"} />
+                <BookmarkBox imgSrc={"/images/feed-4.jpg"} />
+              </div>
+            ) : (
+              <div className="">develope commig soon ...</div>
+            )}
           </div>
         </>
       ) : (

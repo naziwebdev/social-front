@@ -75,3 +75,10 @@
     );
   }
 }
+
+@layer components {
+  .marker {
+    @apply relative font-poppins-semiBold before:content-[''] before:absolute before:-left-3 2xs:before:-left-10 lg:before:-left-20
+        before:-bottom-4 before:w-14 2xs:before:w-28 lg:before:w-48 before:h-1 before:z-10 before:bg-purple-600;
+  }
+}
