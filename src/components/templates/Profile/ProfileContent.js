@@ -123,9 +123,12 @@ export default function profileContent({ pageID }) {
           </p>
           <div className="flex flex-wrap xs:flex-nowrap  items-center gap-2">
             {pageInfo?.ownPage && (
-              <button className="bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold">
+              <Link
+                href={`/profileUpdate/${pageInfo.pageID}`}
+                className="flex justify-center items-center bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold"
+              >
                 Manage
-              </button>
+              </Link>
             )}
             {pageInfo.haveFollowed ? (
               <button
@@ -186,19 +189,25 @@ export default function profileContent({ pageID }) {
           <div className="flex items-center justify-around bg-white my-6 pt-3 pb-3 border-b-[6px] border-zinc-300 rounded-xl shadow-md shadow-zinc-200/50 ">
             <span
               onClick={() => setBtnShowContent("post")}
-              className={`cursor-pointer ${btnShowContent === 'post' && 'marker'}`}
+              className={`cursor-pointer ${
+                btnShowContent === "post" && "marker"
+              }`}
             >
               Post
             </span>
             <span
               onClick={() => setBtnShowContent("reels")}
-              className={`cursor-pointer ${btnShowContent === 'reels' && 'marker'}`}
+              className={`cursor-pointer ${
+                btnShowContent === "reels" && "marker"
+              }`}
             >
               Reels
             </span>
             <span
               onClick={() => setBtnShowContent("repost")}
-              className={`cursor-pointer ${btnShowContent === 'repost' && 'marker'}`}
+              className={`cursor-pointer ${
+                btnShowContent === "repost" && "marker"
+              }`}
             >
               Repsts
             </span>

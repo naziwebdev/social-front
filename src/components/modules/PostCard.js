@@ -34,11 +34,21 @@ export default function PostCard({ post, avatar }) {
   return (
     <div className="overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
       <div className="flex items-center gap-x-5">
-        <img
-          className="w-[40px] h-[40px] rounded-full object-cover"
-          alt="avatar"
-          src={`http://localhost:4002/${avatar}`}
-        />
+        {avatar ? (
+          <img
+            src={`http://localhost:4002/${avatar}`}
+            alt="avatar"
+            className="w-[40px] h-[40px] rounded-full object-cover"
+          />
+        ) : (
+          <Image
+            src="/images/avatar.png"
+            alt="avatar"
+            width={500}
+            height={500}
+            className="w-[40px] h-[40px] rounded-full object-cover"
+          />
+        )}
         <div className="">
           <p className="font-poppins-medium text-sm xs:text-base">
             {post?.user?.name}

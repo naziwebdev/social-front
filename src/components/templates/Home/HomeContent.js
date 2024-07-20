@@ -1,6 +1,6 @@
 import StoryBox from "./StoryBox";
 import Image from "next/image";
-import PostCard from "@/components/modules/PostCard";
+import PostWrapper from "./PostWrapper";
 
 export default function HomeContent() {
   return (
@@ -44,14 +44,7 @@ export default function HomeContent() {
           Post
         </button>
       </div>
-      <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-8 ">
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-      </div>
+      <PostWrapper/>
     </div>
   );
 }

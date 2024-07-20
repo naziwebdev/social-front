@@ -6,8 +6,11 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import postValidator from "@/validations/post";
 import swal from "sweetalert";
+import { useEffect, useState } from "react";
 
 export default function page() {
+  const [user, setUser] = useState({});
+
   const {
     register,
     handleSubmit,
@@ -22,6 +25,21 @@ export default function page() {
     },
     resolver: yupResolver(postValidator),
   });
+
+  const getme = async () => {
+    const res = await fetch("http://localhost:4002/auth/me", {
+      credentials: "include",
+    });
+    const data = await res.json();
+
+    if (res.status === 200) {
+      setUser(data);
+    }
+  };
+
+  useEffect(() => {
+    getme();
+  }, []);
 
   const postHandler = async (data, event) => {
     event.preventDefault();
@@ -146,14 +164,16 @@ export default function page() {
           </span>
         </div>
         <p className="pt-2 text-gray-600">Splite the hashtags with comma (,)</p>
-        <div className="flex justify-between items-center mt-6">
-          <p className="text-red-500 text-lg">
-            You need to verify your account
-          </p>
-          <button className="flex justify-center items-center p-2 bg-red-500 text-white rounded-lg ">
-            send verification
-          </button>
-        </div>
+        {user.isVerified === false && (
+          <div className="flex justify-between items-center mt-6">
+            <p className="text-red-500 text-lg">
+              You need to verify your account
+            </p>
+            <button className="flex justify-center items-center p-2 bg-red-500 text-white rounded-lg ">
+              send verification
+            </button>
+          </div>
+        )}
         <button
           type="submit"
           className="ms-auto my-4 flex justify-center items-center p-3 bg-indigo-500 text-white rounded-lg"
