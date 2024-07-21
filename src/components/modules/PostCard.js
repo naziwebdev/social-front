@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
@@ -7,6 +8,7 @@ import { FaHeart } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiShare2 } from "react-icons/fi";
+
 
 export default function PostCard({ post, avatar }) {
   const likeHandler = async (postID) => {
@@ -49,10 +51,10 @@ export default function PostCard({ post, avatar }) {
             className="w-[40px] h-[40px] rounded-full object-cover"
           />
         )}
-        <div className="">
-          <p className="font-poppins-medium text-sm xs:text-base">
+        <div>
+          <Link href={`/profile/${post?.user?._id}`} className="font-poppins-medium text-sm xs:text-base">
             {post?.user?.name}
-          </p>
+          </Link>
           <p className="text-[.65rem] xs:text-xs text-zinc-500 xs:pt-1">
             Dubai , 6 Minuts Ago
           </p>

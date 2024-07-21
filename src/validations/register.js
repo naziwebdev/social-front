@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 const registerValidator = yup.object().shape({
-  name: yup.string().min(3, "نام حداقل باید ۳ کارکتر باشد"),
-  username: yup.string().min(3, "نام حداقل باید ۳ کارکتر باشد"),
-  email: yup.string().email("ایمیل را به درستی وارد کنید"),
+  name: yup.string().min(3, "نام حداقل باید ۳ کارکتر باشد").required('وارد کردن این فیلد الزامیست'),
+  username: yup.string().min(3, "نام حداقل باید ۳ کارکتر باشد").required('وارد کردن این فیلد الزامیست'),
+  email: yup.string().email("ایمیل را به درستی وارد کنید").required('وارد کردن این فیلد الزامیست'),
   password: yup
     .string()
     .required("رمز عبور خود را وارد نمایید")

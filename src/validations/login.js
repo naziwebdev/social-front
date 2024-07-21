@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 const loginValidator = yup.object().shape({
-  email: yup.string().email("ایمیل را به درستی وارد کنید"),
+  email: yup.string().email("ایمیل را به درستی وارد کنید").required('وارد کردن این فیلد الزامیست'),
   password: yup
     .string()
     .required("رمز عبور خود را وارد نمایید")
