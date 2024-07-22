@@ -6,12 +6,16 @@ export default function () {
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
-    const res = await fetch("http://localhost:4002/post");
+    const res = await fetch("http://localhost:4002/post",{
+      credentials:"include"
+    });
     const data = await res.json();
     if (res.status === 200) {
       setPosts(data);
     }
   };
+
+ 
 
 
   useEffect(() => {

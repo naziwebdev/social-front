@@ -122,15 +122,14 @@ export default function profileContent({ pageID }) {
             {pageInfo?.page?.biogeraphy}
           </p>
           <div className="flex flex-wrap xs:flex-nowrap  items-center gap-2">
-            {pageInfo?.ownPage && (
+            {pageInfo?.ownPage ? (
               <Link
                 href={`/profileUpdate/${pageInfo.pageID}`}
                 className="flex justify-center items-center bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold"
               >
                 Manage
               </Link>
-            )}
-            {pageInfo.haveFollowed ? (
+            ) : pageInfo.haveFollowed ? (
               <button
                 onClick={unfollowHandler}
                 className="bg-blue-400 h-10 md:h-12 w-24 md:w-28 rounded-3xl text-white p-2  text-sm font-poppins-semiBold"
@@ -215,7 +214,7 @@ export default function profileContent({ pageID }) {
 
           <div className="overflow-hidden flex flex-col items-center gap-y-4 mt-5">
             {btnShowContent === "post" ? (
-              pageInfo.postsWithLikes?.map((item) => (
+              pageInfo.posts?.map((item) => (
                 <PostCard
                   key={item._id}
                   avatar={pageInfo.page?.avatar}

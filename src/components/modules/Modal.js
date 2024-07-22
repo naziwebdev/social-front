@@ -13,7 +13,7 @@ export default function Modal({ children, onClose }) {
   return mounted
     ? createPortal(
         <div className="w-full h-dvh fixed top-0 left-0 z-50 bg-black/20 flex justify-center items-center ">
-          <div className="w-[70%] h-auto p-12 bg-white rounded-lg relative ">
+          <div className="w-[80%] h-auto p-8 bg-white rounded-lg relative ">
             <span
               onClick={closeModal}
               className="absolute top-5 left-5 cursor-pointer text-xl"

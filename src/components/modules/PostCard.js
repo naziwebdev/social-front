@@ -5,12 +5,20 @@ import Link from "next/link";
 import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa6";
-import { FaRegBookmark } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiShare2 } from "react-icons/fi";
+import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import Modal from "./Modal";
+import { useState } from "react";
 
 
 export default function PostCard({ post, avatar }) {
+  const [openCommentModal, setOpenCommentModal] = useState(false);
+
+  const handleCommentModal = () => setOpenCommentModal(false);
+
   const likeHandler = async (postID) => {
     const res = await fetch(`http://localhost:4002/post/like`, {
       method: "POST",
@@ -20,6 +28,10 @@ export default function PostCard({ post, avatar }) {
       credentials: "include",
       body: JSON.stringify({ postID }),
     });
+
+    if (res.status === 201) {
+      location.reload();
+    }
   };
 
   const dislikeHandler = async (postID) => {
@@ -31,6 +43,10 @@ export default function PostCard({ post, avatar }) {
       credentials: "include",
       body: JSON.stringify({ postID }),
     });
+
+    if (res.status === 200) {
+      location.reload();
+    }
   };
 
   return (
@@ -52,7 +68,10 @@ export default function PostCard({ post, avatar }) {
           />
         )}
         <div>
-          <Link href={`/profile/${post?.user?._id}`} className="font-poppins-medium text-sm xs:text-base">
+          <Link
+            href={`/profile/${post?.user?._id}`}
+            className="font-poppins-medium text-sm xs:text-base"
+          >
             {post?.user?.name}
           </Link>
           <p className="text-[.65rem] xs:text-xs text-zinc-500 xs:pt-1">
@@ -78,7 +97,10 @@ export default function PostCard({ post, avatar }) {
               className="text-xl xs:text-2xl cursor-pointer text-red-500"
             />
           )}
-          <FaRegComment className="text-xl xs:text-2xl cursor-pointer" />
+          <FaRegComment
+            onClick={() => setOpenCommentModal(true)}
+            className="text-xl xs:text-2xl cursor-pointer"
+          />
           <FiShare2 className="text-xl xs:text-2xl cursor-pointer" />
         </div>
         <div className="flex items-center gap-x-2 xs:gap-x-4">
@@ -86,9 +108,12 @@ export default function PostCard({ post, avatar }) {
             <MdOutlineRemoveRedEye className=" text-lg xs:text-xl" />
             <span className="text-xs xs:text-sm">29,428</span>
           </p>
-          <div className="flex items-center xs:gap-x-1.5 cursor-pointer px-2 py-1 rounded-md bg-purple-600 text-white ">
-            <FaRegBookmark className="text-sm xs:text-base" />
-            <span className="text-sm xs:text-base">save</span>
+          <div className="cursor-pointer ">
+            {post?.isSave ? (
+              <FaBookmark className="text-2xl" />
+            ) : (
+              <FaRegBookmark className="text-2xl" />
+            )}
           </div>
         </div>
       </div>
@@ -127,9 +152,40 @@ export default function PostCard({ post, avatar }) {
       <p className="text-zinc-700 mt-2 text-sm xs:text-base">
         {post?.description}
       </p>
-      <p className="text-stone-400 mt-1.5 text-sm cursor-pointer">
-        View all 270 comments ...
+      <p
+        onClick={() => setOpenCommentModal(true)}
+        className="text-stone-400 mt-1.5 text-sm cursor-pointer"
+      >
+        {`View all ${
+          post?.postComments ? post?.postComments?.length : 0
+        } comments ...`}
       </p>
+      {openCommentModal && (
+        <Modal onClose={handleCommentModal}>
+          <div>
+            {post?.postComments?.length &&
+              post.postComments.map((item) => (
+                <div className="relative border-b-[1px] border-zinc-200 py-2">
+                  <div className="flex items-center gap-x-2 ">
+                    <img
+                      src={`http://localhost:4002/${item.user.avatar}`}
+                      alt="avatar"
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <span className="font-poppins-bold">{item.user.name}</span>
+                  </div>
+                  <p className="text-gray-900">{item.content}</p>
+                  <RiDeleteBin6Fill className="absolute right-0 top-4 text-xl text-red-500 cursor-pointer" />
+                </div>
+              ))}
+
+              <form className="flex flex-wrap 2xs:flex-nowrap justify-between items-center gap-2 mt-5">
+                <textarea className="w-full 2xs:flex-1 resize-none outline-none border-2 border-purple-600 rounded-2xl p-2" placeholder="put a comment ..."></textarea>
+                <button type="submit" className="flex justify-center items-center rounded-2xl outline-none h-12 w-16 bg-black text-white ">Add</button>
+              </form>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
