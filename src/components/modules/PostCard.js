@@ -15,11 +15,17 @@ import { useState } from "react";
 import commentValidator from "@/validations/comment";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
 
 export default function PostCard({ post, avatar }) {
   const [openCommentModal, setOpenCommentModal] = useState(false);
 
-  const handleCommentModal = () => setOpenCommentModal(false);
+  const handleCommentModal = () => {
+    setOpenCommentModal(false);
+    location.reload()
+  }
+
+  const router = useRouter()
 
   const {
     register,
@@ -101,6 +107,47 @@ export default function PostCard({ post, avatar }) {
       console.log(await res);
     }
   };
+
+
+  const removeComment = async (commentID) => {
+    
+    swal({
+      title:'ایا از حذف اطمینان دارید',
+      icon:'warning',
+      buttons:['خیر','بله']
+    }).then(async (value) => {
+      if(value){
+
+        const res = await fetch(`http://localhost:4002/post/comment/${commentID}`, {
+          method:"DELETE",
+          credentials: "include",
+        });
+    
+        if (res.status === 200) {
+          await res.json();
+    
+          swal({
+            title: "با موفقیت حذف  شد",
+            icon: "success",
+            buttons: "بستن",
+          }).then(value => {
+            if(value){
+              setOpenCommentModal(false)
+            }
+          })
+        } else {
+          swal({
+            title: "با شکست روبرو شد",
+            icon: "error",
+            buttons: "بستن",
+          });
+       
+        }
+      }
+    })
+
+  }
+
 
   return (
     <div className="overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
@@ -218,7 +265,7 @@ export default function PostCard({ post, avatar }) {
           <div>
             {post?.postComments?.length &&
               post.postComments.map((item) => (
-                <div className="relative border-b-[1px] border-zinc-200 py-2">
+                <div key={item._id} className="relative border-b-[1px] border-zinc-200 py-2">
                   <div className="flex items-center gap-x-2 ">
                     <img
                       src={`http://localhost:4002/${item.user.avatar}`}
@@ -228,7 +275,7 @@ export default function PostCard({ post, avatar }) {
                     <span className="font-poppins-bold">{item.user.name}</span>
                   </div>
                   <p className="text-gray-900">{item.content}</p>
-                  <RiDeleteBin6Fill className="absolute right-0 top-4 text-xl text-red-500 cursor-pointer" />
+                  <RiDeleteBin6Fill onClick={() => removeComment(item._id)} className="absolute right-0 top-4 text-xl text-red-500 cursor-pointer" />
                 </div>
               ))}
 
