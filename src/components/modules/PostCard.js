@@ -12,12 +12,26 @@ import { FaBookmark } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import Modal from "./Modal";
 import { useState } from "react";
-
+import commentValidator from "@/validations/comment";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function PostCard({ post, avatar }) {
   const [openCommentModal, setOpenCommentModal] = useState(false);
 
   const handleCommentModal = () => setOpenCommentModal(false);
+
+  const {
+    register,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    defaultValues: {
+      content: "",
+    },
+    resolver: yupResolver(commentValidator),
+  });
 
   const likeHandler = async (postID) => {
     const res = await fetch(`http://localhost:4002/post/like`, {
@@ -46,6 +60,45 @@ export default function PostCard({ post, avatar }) {
 
     if (res.status === 200) {
       location.reload();
+    }
+  };
+
+  const addComment = async (data, event) => {
+    event.preventDefault();
+    const postID = post._id;
+
+    const res = await fetch("http://localhost:4002/post/comment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        postID,
+        content: data.content,
+      }),
+      credentials: "include",
+    });
+
+    if (res.status === 201) {
+      await res.json();
+
+      swal({
+        title: "با موفقیت ثبت  شد",
+        icon: "success",
+        buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+          reset();
+          setOpenCommentModal(false)
+        }
+      });
+    } else {
+      swal({
+        title: "     با شکست روبرو شد",
+        icon: "error",
+        buttons: "بستن",
+      });
+      console.log(await res);
     }
   };
 
@@ -179,10 +232,25 @@ export default function PostCard({ post, avatar }) {
                 </div>
               ))}
 
-              <form className="flex flex-wrap 2xs:flex-nowrap justify-between items-center gap-2 mt-5">
-                <textarea className="w-full 2xs:flex-1 resize-none outline-none border-2 border-purple-600 rounded-2xl p-2" placeholder="put a comment ..."></textarea>
-                <button type="submit" className="flex justify-center items-center rounded-2xl outline-none h-12 w-16 bg-black text-white ">Add</button>
-              </form>
+            <form
+              onSubmit={handleSubmit(addComment)}
+              className="flex flex-wrap 2xs:flex-nowrap justify-between items-center gap-2 mt-5"
+            >
+              <textarea
+                {...register("content")}
+                className="w-full 2xs:flex-1 resize-none outline-none border-2 border-purple-600 rounded-2xl p-2"
+                placeholder="put a comment ..."
+              ></textarea>
+              <span className="tex-sm text-red-500">
+                {errors.content && errors.content.message}
+              </span>
+              <button
+                type="submit"
+                className="flex justify-center items-center rounded-2xl outline-none h-12 w-16 bg-black text-white "
+              >
+                Add
+              </button>
+            </form>
           </div>
         </Modal>
       )}
