@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { FaLock } from "react-icons/fa";
 import Modal from "@/components/modules/Modal";
-import BookmarkBox from "../Bookmarks/BookmarkBox";
+import Reels from "@/components/modules/Reels";
 
 export default function profileContent({ pageID }) {
   const [pageInfo, setPageInfo] = useState({});
@@ -223,10 +223,10 @@ export default function profileContent({ pageID }) {
               ))
             ) : btnShowContent === "reels" ? (
               <div className="flex justify-center flex-wrap gap-4">
-                <BookmarkBox imgSrc={"/images/feed-1.jpg"} />
-                <BookmarkBox imgSrc={"/images/feed-2.jpg"} />
-                <BookmarkBox imgSrc={"/images/feed-3.jpg"} />
-                <BookmarkBox imgSrc={"/images/feed-4.jpg"} />
+                <Reels imgSrc={"/images/feed-1.jpg"} />
+                <Reels imgSrc={"/images/feed-2.jpg"} />
+                <Reels imgSrc={"/images/feed-3.jpg"} />
+                <Reels imgSrc={"/images/feed-4.jpg"} />
               </div>
             ) : (
               <div className="">develope commig soon ...</div>

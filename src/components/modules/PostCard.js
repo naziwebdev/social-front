@@ -17,7 +17,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 
-export default function PostCard({ post, avatar }) {
+export default function PostCard({ post, avatar , isSave }) {
+ 
   const [openCommentModal, setOpenCommentModal] = useState(false);
 
   const handleCommentModal = () => {
@@ -169,7 +170,7 @@ export default function PostCard({ post, avatar }) {
         buttons: "بستن",
       }).then((value) => {
         if (value) {
-         location.reload()
+          location.reload();
         }
       });
     } else {
@@ -198,7 +199,7 @@ export default function PostCard({ post, avatar }) {
         buttons: "بستن",
       }).then((value) => {
         if (value) {
-          location.reload()
+          location.reload();
         }
       });
     } else {
@@ -270,7 +271,7 @@ export default function PostCard({ post, avatar }) {
             <span className="text-xs xs:text-sm">29,428</span>
           </p>
           <div className="cursor-pointer ">
-            {post?.isSave ? (
+            {post?.isSave || isSave ? (
               <FaBookmark onClick={unsavePostHandler} className="text-2xl" />
             ) : (
               <FaRegBookmark onClick={savePostHandler} className="text-2xl" />

@@ -1,10 +1,12 @@
-import Header from "@/components/modules/Header"
-import Sidebar from "@/components/modules/Sidebar"
-import BookmarkBox from "@/components/templates/Bookmarks/BookmarkBox"
-import SmallSizeMenu from "@/components/modules/SmallSizeMenu"
-import Footer from "@/components/modules/Footer"
+import Header from "@/components/modules/Header";
+import Sidebar from "@/components/modules/Sidebar";
+import SmallSizeMenu from "@/components/modules/SmallSizeMenu";
+import Footer from "@/components/modules/Footer";
+import PostCard from "@/components/modules/PostCard";
 import { authUser } from "@/utils/auth";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { data } from "autoprefixer";
 
 export default async function Home() {
   const isAuth = await authUser();
@@ -12,25 +14,33 @@ export default async function Home() {
   if (!isAuth) {
     redirect("/login");
   }
+
+  const getSavesPost = async () => {
+    const res = await fetch("http://localhost:4002/post/saves", {
+      headers: {
+        Cookie: cookies().toString(),
+      },
+    });
+
+    const data = await res.json();
+    return data;
+  };
+
+  const saves = await getSavesPost();
+
   return (
-   <div className="relative">
-   <Header/>
-    <main className="flex justify-between mt-6">
-     <Sidebar/>
-     <div className="flex-1  px-6 flex flex-wrap gap-4">
-     <BookmarkBox imgSrc={'/images/feed-5.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-1.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-2.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-3.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-4.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-6.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-7.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-8.jpg'}/>
-     <BookmarkBox imgSrc={'/images/feed-9.jpg'}/>
-     </div>
-    </main>
-    <SmallSizeMenu isActiveLargeSize={false}/>
-    <Footer/>
-   </div>
-  )
+    <div className="relative">
+      <Header />
+      <main className="flex justify-between mt-6">
+        <Sidebar />
+        <div className="flex-1  px-6 flex flex-wrap gap-4">
+          {saves.map((item) => (
+            <PostCard key={item._id} post={item.post} avatar={isAuth.avatar} isSave={true}/>
+          ))}
+        </div>
+      </main>
+      <SmallSizeMenu isActiveLargeSize={false} />
+      <Footer />
+    </div>
+  );
 }

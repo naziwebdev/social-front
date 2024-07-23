@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-export default function BookmarkBox({imgSrc}) {
+export default function Reels({imgSrc}) {
   return (
     <article className='relative hover:scale-105 duration-200 w-[260px] h-[400px] rounded-xl cursor-pointer'>
        <div>
