@@ -22,10 +22,10 @@ export default function PostCard({ post, avatar }) {
 
   const handleCommentModal = () => {
     setOpenCommentModal(false);
-    location.reload()
-  }
+    location.reload();
+  };
 
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     register,
@@ -95,7 +95,7 @@ export default function PostCard({ post, avatar }) {
       }).then((value) => {
         if (value) {
           reset();
-          setOpenCommentModal(false)
+          setOpenCommentModal(false);
         }
       });
     } else {
@@ -108,46 +108,107 @@ export default function PostCard({ post, avatar }) {
     }
   };
 
-
   const removeComment = async (commentID) => {
-    
     swal({
-      title:'ایا از حذف اطمینان دارید',
-      icon:'warning',
-      buttons:['خیر','بله']
+      title: "ایا از حذف اطمینان دارید",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
     }).then(async (value) => {
-      if(value){
+      if (value) {
+        const res = await fetch(
+          `http://localhost:4002/post/comment/${commentID}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+          }
+        );
 
-        const res = await fetch(`http://localhost:4002/post/comment/${commentID}`, {
-          method:"DELETE",
-          credentials: "include",
-        });
-    
         if (res.status === 200) {
           await res.json();
-    
+
           swal({
             title: "با موفقیت حذف  شد",
             icon: "success",
             buttons: "بستن",
-          }).then(value => {
-            if(value){
-              setOpenCommentModal(false)
+          }).then((value) => {
+            if (value) {
+              setOpenCommentModal(false);
             }
-          })
+          });
         } else {
           swal({
             title: "با شکست روبرو شد",
             icon: "error",
             buttons: "بستن",
           });
-       
         }
       }
-    })
+    });
+  };
 
-  }
+  const savePostHandler = async () => {
+    const postID = post._id;
 
+    const res = await fetch("http://localhost:4002/post/save", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        postID,
+      }),
+      credentials: "include",
+    });
+
+    if (res.status === 201) {
+      await res.json();
+
+      swal({
+        title: "با موفقیت ثبت  شد",
+        icon: "success",
+        buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+         location.reload()
+        }
+      });
+    } else {
+      swal({
+        title: "     با شکست روبرو شد",
+        icon: "error",
+        buttons: "بستن",
+      });
+      console.log(await res);
+    }
+  };
+
+  const unsavePostHandler = async () => {
+    const postID = post._id;
+    const res = await fetch(`http://localhost:4002/post/${postID}/unsave`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    if (res.status === 200) {
+      await res.json();
+
+      swal({
+        title: "با موفقیت حذف  شد",
+        icon: "success",
+        buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+          location.reload()
+        }
+      });
+    } else {
+      swal({
+        title: "با شکست روبرو شد",
+        icon: "error",
+        buttons: "بستن",
+      });
+    }
+  };
 
   return (
     <div className="overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
@@ -210,9 +271,9 @@ export default function PostCard({ post, avatar }) {
           </p>
           <div className="cursor-pointer ">
             {post?.isSave ? (
-              <FaBookmark className="text-2xl" />
+              <FaBookmark onClick={unsavePostHandler} className="text-2xl" />
             ) : (
-              <FaRegBookmark className="text-2xl" />
+              <FaRegBookmark onClick={savePostHandler} className="text-2xl" />
             )}
           </div>
         </div>
@@ -265,7 +326,10 @@ export default function PostCard({ post, avatar }) {
           <div>
             {post?.postComments?.length &&
               post.postComments.map((item) => (
-                <div key={item._id} className="relative border-b-[1px] border-zinc-200 py-2">
+                <div
+                  key={item._id}
+                  className="relative border-b-[1px] border-zinc-200 py-2"
+                >
                   <div className="flex items-center gap-x-2 ">
                     <img
                       src={`http://localhost:4002/${item.user.avatar}`}
@@ -275,7 +339,10 @@ export default function PostCard({ post, avatar }) {
                     <span className="font-poppins-bold">{item.user.name}</span>
                   </div>
                   <p className="text-gray-900">{item.content}</p>
-                  <RiDeleteBin6Fill onClick={() => removeComment(item._id)} className="absolute right-0 top-4 text-xl text-red-500 cursor-pointer" />
+                  <RiDeleteBin6Fill
+                    onClick={() => removeComment(item._id)}
+                    className="absolute right-0 top-4 text-xl text-red-500 cursor-pointer"
+                  />
                 </div>
               ))}
 
