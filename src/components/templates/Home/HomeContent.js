@@ -1,8 +1,9 @@
 import StoryBox from "./StoryBox";
-import Image from "next/image";
 import PostWrapper from "./PostWrapper";
+import { authUser } from "@/utils/auth";
 
-export default function HomeContent() {
+export default async function HomeContent() {
+  const user = await authUser();
   return (
     <div className="flex-1 xl:w-1/2  pe-2">
       <div className="flex flex-wrap xs:flex-nowrap items-center justify-center xs:justify-between gap-2 sm:gap-x-4">
@@ -28,12 +29,10 @@ export default function HomeContent() {
         />
       </div>
       <div className="flex items-center justify-between gap-x-5 mt-8 bg-white shadow-md shadow-zinc-200/50 rounded-2xl p-2">
-        <Image
-          className="w-[40px] h-[40px]  rounded-full"
+        <img
+          className="w-[40px] h-[40px] object-cover rounded-full"
           alt="avatar"
-          width={60}
-          height={55}
-          src="/images/profile-8.jpg"
+          src={`http://localhost:4002/${user.avatar}`}
         />
         <input
           type="text"
@@ -44,7 +43,7 @@ export default function HomeContent() {
           Post
         </button>
       </div>
-      <PostWrapper/>
+      <PostWrapper />
     </div>
   );
 }

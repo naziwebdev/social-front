@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
-import Image from "next/image";
+import { authUser } from "@/utils/auth";
 
-export default function Header() {
+export default async function Header() {
+  const user = await authUser()
   return (
     <div className="flex justify-between items-center gap-5 p-4 xs:px-6 xs:py-8 w-full  bg-white shadow-md shadow-zinc-200/50">
       <Link href="/" className="font-poppins-black text-lg xs:text-2xl">
@@ -23,12 +24,10 @@ export default function Header() {
         <button className="flex md:hidden justify-center items-center bg-indigo-500 text-white w-7 h-7 xs:w-10 xs:h-10 text-xl xs:text-2xl  rounded-full">
         <Link href={"/postUpload"}>+</Link>
         </button>
-        <Image
-          className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full"
+        <img
+          className="w-[40px] h-[40px] xs:w-[60px] xs:h-[55px] rounded-full object-cover"
           alt="avatar"
-          width={60}
-          height={50}
-          src="/images/profile-8.jpg"
+          src={`http://localhost:4002/${user.avatar}`}
         />
       </div>
     </div>
