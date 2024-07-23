@@ -21,11 +21,12 @@ export default function page() {
       credentials: "include",
     });
     const data = await res.json();
-
     if (res.status === 200) {
       setUser(data);
     }
   };
+
+  
 
   useEffect(() => {
     getme();

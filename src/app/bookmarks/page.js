@@ -3,9 +3,15 @@ import Sidebar from "@/components/modules/Sidebar"
 import BookmarkBox from "@/components/templates/Bookmarks/BookmarkBox"
 import SmallSizeMenu from "@/components/modules/SmallSizeMenu"
 import Footer from "@/components/modules/Footer"
+import { authUser } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
+export default async function Home() {
+  const isAuth = await authUser();
 
-export default function Home() {
+  if (!isAuth) {
+    redirect("/login");
+  }
   return (
    <div className="relative">
    <Header/>
