@@ -7,8 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import postValidator from "@/validations/post";
 import swal from "sweetalert";
 import { useEffect, useState } from "react";
+import { userInfo } from "@/utils/userInfo";
 
 export default function page() {
+  
+  const getUserInfo = async () => {
+    const info = await userInfo();
+    setUser(info);
+  };
+
   const [user, setUser] = useState({});
 
   const {
@@ -26,19 +33,8 @@ export default function page() {
     resolver: yupResolver(postValidator),
   });
 
-  const getme = async () => {
-    const res = await fetch("http://localhost:4002/auth/me", {
-      credentials: "include",
-    });
-    const data = await res.json();
-
-    if (res.status === 200) {
-      setUser(data);
-    }
-  };
-
   useEffect(() => {
-    getme();
+    getUserInfo();
   }, []);
 
   const postHandler = async (data, event) => {

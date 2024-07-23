@@ -9,6 +9,7 @@ import userValidator from "@/validations/userInfo";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
+import { userInfo } from "@/utils/userInfo";
 
 export default function page() {
   const [user, setUser] = useState({});
@@ -17,16 +18,9 @@ export default function page() {
   const router = useRouter();
 
   const getme = async () => {
-    const res = await fetch("http://localhost:4002/auth/me", {
-      credentials: "include",
-    });
-    const data = await res.json();
-    if (res.status === 200) {
-      setUser(data);
-    }
+    const info = await userInfo();
+    setUser(info);
   };
-
-  
 
   useEffect(() => {
     getme();
@@ -85,7 +79,7 @@ export default function page() {
     }
   };
 
-  console.log(user)
+  console.log(user);
 
   const avatarHandler = async (event) => {
     event.preventDefault();
