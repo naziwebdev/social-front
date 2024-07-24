@@ -9,6 +9,7 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FiShare2 } from "react-icons/fi";
 import { FaRegBookmark } from "react-icons/fa";
 import { FaBookmark } from "react-icons/fa";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import Modal from "./Modal";
 import { useState } from "react";
@@ -16,10 +17,11 @@ import commentValidator from "@/validations/comment";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
+import swal from "sweetalert";
 
-export default function PostCard({ post, avatar , isSave }) {
- 
+export default function PostCard({ post, avatar, isSave, isOwn }) {
   const [openCommentModal, setOpenCommentModal] = useState(false);
+  const [openActionPost, setOpenActionPost] = useState(false);
 
   const handleCommentModal = () => {
     setOpenCommentModal(false);
@@ -211,8 +213,73 @@ export default function PostCard({ post, avatar , isSave }) {
     }
   };
 
+  const removePost = async (postID) => {
+    swal({
+      title: "ایا از حذف اطمینان دارید",
+      icon: "warning",
+      buttons: ["خیر", "بله"],
+    }).then(async (value) => {
+      if (value) {
+        const res = await fetch(`http://localhost:4002/post/${postID}/remove`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+
+        if (res.status === 200) {
+          await res.json();
+
+          swal({
+            title: "با موفقیت حذف  شد",
+            icon: "success",
+            buttons: "بستن",
+          }).then((value) => {
+            if (value) {
+              location.reload();
+            }
+          });
+        } else {
+          swal({
+            title: "با شکست روبرو شد",
+            icon: "error",
+            buttons: "بستن",
+          });
+        }
+      }
+    });
+  };
+
   return (
-    <div className="overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
+    <div className="relative overflow-hidden w-full bg-white p-3 rounded-xl shadow-md shadow-zinc-200/50">
+      {post?.isOwn ? (
+        <div className="absolute top-4 right-4">
+          <BsThreeDotsVertical
+            onClick={() => setOpenActionPost((prev) => !prev)}
+            className="text-xl cursor-pointer"
+          />
+          {openActionPost && (
+            <RiDeleteBin6Fill
+              onClick={() => removePost(post._id)}
+              className="text-2xl text-red-500 cursor-pointer mt-1.5"
+            />
+          )}
+        </div>
+      ) : (
+        isOwn && (
+          <div className="absolute top-4 right-4">
+            <BsThreeDotsVertical
+              onClick={() => setOpenActionPost((prev) => !prev)}
+              className="text-xl cursor-pointer"
+            />
+            {openActionPost && (
+              <RiDeleteBin6Fill
+                onClick={() => removePost(post._id)}
+                className="text-2xl text-red-500 cursor-pointer mt-1.5"
+              />
+            )}
+          </div>
+        )
+      )}
+
       <div className="flex items-center gap-x-5">
         {avatar ? (
           <img

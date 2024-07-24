@@ -60,6 +60,7 @@ export default function profileContent({ pageID }) {
     }
   };
 
+
   const unfollowHandler = async () => {
     const res = await fetch(`http://localhost:4002/page/${pageID}/unfollow`, {
       method: "POST",
@@ -219,6 +220,7 @@ export default function profileContent({ pageID }) {
                   key={item._id}
                   avatar={pageInfo.page?.avatar}
                   post={item}
+                  isOwn = {pageInfo.isOwn}
                 />
               ))
             ) : btnShowContent === "reels" ? (

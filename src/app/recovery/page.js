@@ -12,12 +12,12 @@ export default function page() {
         <form className="w-full rounded-2xl  mt-4 xs:mt-8 lg:mt-12 flex flex-col gap-y-4 bg-white/40 p-4 2xs:p-6 xs:bg-transparent xs:p-0">
           <div className="flex flex-col gap-y-1.5">
             <label htmlFor="identifier" className="font-poppins-medium text-lg">
-              Username or email
+              email
             </label>
             <input
-              type="text"
+              type="email"
               id="identifier"
-              placeholder="enter the your username "
+              placeholder="enter the your email "
               className="w-full md:w-3/4 p-2.5 rounded-lg bg-indigo-200 border-2 border-black placeholder:text-zinc-500 placeholder:font-poppins-semiBold placeholder:text-sm"
             />
           </div>
