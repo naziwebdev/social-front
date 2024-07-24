@@ -1,4 +1,5 @@
 import StoryBox from "./StoryBox";
+import Image from "next/image";
 import PostWrapper from "./PostWrapper";
 import { authUser } from "@/utils/auth";
 
@@ -29,11 +30,21 @@ export default async function HomeContent() {
         />
       </div>
       <div className="flex items-center justify-between gap-x-5 mt-8 bg-white shadow-md shadow-zinc-200/50 rounded-2xl p-2">
-        <img
-          className="w-[40px] h-[40px] object-cover rounded-full"
-          alt="avatar"
-          src={`http://localhost:4002/${user.avatar}`}
-        />
+        {user?.avatar ? (
+          <img
+            src={`http://localhost:4002/${user.avatar}`}
+            alt="avatar"
+            className="w-[40px] h-[40px] object-cover rounded-full"
+          />
+        ) : (
+          <Image
+            src="/images/avatar.png"
+            alt="avatar"
+            width={500}
+            height={500}
+            className="w-[40px] h-[40px] object-cover rounded-full"
+          />
+        )}
         <input
           type="text"
           placeholder="what's on your mind, peyman ?"

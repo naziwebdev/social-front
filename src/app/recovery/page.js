@@ -40,7 +40,7 @@ export default function page() {
 
       swal({
         title: "ایمیل با موفقیت ارسال شد ",
-        text:"لطفا ایمیل خود را چک کنید",
+        text: "لطفا ایمیل خود را چک کنید",
         icon: "success",
         buttons: "بستن",
       }).then((value) => {

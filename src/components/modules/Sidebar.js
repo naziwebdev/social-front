@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { HiOutlineHome } from "react-icons/hi";
 import { TbBell } from "react-icons/tb";
@@ -7,6 +8,7 @@ import { BiBookmark } from "react-icons/bi";
 import { TbSettings } from "react-icons/tb";
 import { CgProfile } from "react-icons/cg";
 import { authUser } from "@/utils/auth";
+
  
 
 export default async  function Sidebar() {
@@ -15,13 +17,23 @@ export default async  function Sidebar() {
     <div className="sticky left-0 top-5 w-[80px] xs:w-[200px] md:w-[280px] xl:w-[360px] px-2 h-full">
       <nav className="bg-white shadow-md shadow-zinc-200/50 rounded-lg">
         <div className="flex items-center justify-center gap-x-2 md:gap-x-5 py-3  xs:p-3 md:p-5">
+           {user?.avatar ? (
           <img
-            className="w-[30px] h-[30px] xs:w-[60px] xs:h-[55px] rounded-full object-cover"
+          src={`http://localhost:4002/${user.avatar}`}
             alt="avatar"
-            width={60}
-            height={55}
-            src={`http://localhost:4002/${user.avatar}`}
+            className="w-[30px] h-[30px] xs:w-[60px] xs:h-[55px] rounded-full object-cover"
+
           />
+        ) : (
+          <Image
+            src="/images/avatar.png"
+            alt="avatar"
+            width={500}
+            height={500}
+            className="w-[30px] h-[30px] xs:w-[60px] xs:h-[55px] rounded-full object-cover"
+
+          />
+        )}
           <div className="hidden xs:block">
             <p className="font-poppins-bold text-sm md:text-base">
               {user.name}
