@@ -1,7 +1,64 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import resetPasswordValidator from "@/validations/resetPassword";
+import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
-export default function page() {
+export default function page({ params }) {
+  const router = useRouter();
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      password: "",
+    },
+    resolver: yupResolver(resetPasswordValidator),
+  });
+
+  const resetPasswordHandle = async (data, event) => {
+    event.preventDefault();
+    const res = await fetch("http://localhost:4002/auth/reset-password", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        token: params.id,
+        password: data.password,
+      }),
+    });
+
+    if (res.status === 200) {
+      await res.json();
+
+      swal({
+        title: "پسورد با موفقیت تغییر کرد",
+        icon: "success",
+        buttons: "بستن",
+      }).then((value) => {
+        if (value) {
+          router.replace("/login");
+          reset();
+        }
+      });
+    } else {
+      swal({
+        title: "تغییر پسورد با شکست روبرو شد",
+        icon: "error",
+        buttons: "بستن",
+      });
+      console.log(await res);
+    }
+  };
+
   return (
     <div className="relative flex justify-between items-center  h-dvh">
       <div className="w-full 2xs:w-[80%] absolute left-1/2 -translate-x-1/2 xs:static xs:left-0 xs:-translate-x-0  xs:flex-1 p-6 sm:p-10 xl:p-14">
@@ -9,12 +66,16 @@ export default function page() {
           Reset Password
         </h2>
 
-        <form className="w-full rounded-2xl  mt-4 xs:mt-8 lg:mt-12 flex flex-col gap-y-4 bg-white/40 p-4 2xs:p-6 xs:bg-transparent xs:p-0">
+        <form
+          onSubmit={handleSubmit(resetPasswordHandle)}
+          className="w-full rounded-2xl  mt-4 xs:mt-8 lg:mt-12 flex flex-col gap-y-4 bg-white/40 p-4 2xs:p-6 xs:bg-transparent xs:p-0"
+        >
           <div className="flex flex-col gap-y-1.5">
-            <label htmlFor="identifier" className="font-poppins-medium text-lg">
+            <label htmlFor="password" className="font-poppins-medium text-lg">
               password
             </label>
             <input
+              {...register("password")}
               type="password"
               id="password"
               placeholder="enter the your password"
