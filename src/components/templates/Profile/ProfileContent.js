@@ -123,7 +123,7 @@ export default function profileContent({ pageID }) {
             {pageInfo?.page?.biogeraphy}
           </p>
           <div className="flex flex-wrap xs:flex-nowrap  items-center gap-2">
-            {pageInfo?.ownPage ? (
+            {pageInfo?.isOwn ? (
               <Link
                 href={`/profileUpdate/${pageInfo.pageID}`}
                 className="flex justify-center items-center bg-transparent h-10 md:h-12 w-24 md:w-28 border-2 border-purple-700 rounded-3xl text-purple-700 p-2 text-sm font-poppins-semiBold"
@@ -253,9 +253,9 @@ export default function profileContent({ pageID }) {
                 href={`/profile/${item._id}`}
                 className="flex items-center gap-x-4  pt-8"
               >
-                {pageInfo.page?.avatar ? (
+                {item?.avatar ? (
                   <img
-                    src={`http://localhost:4002/${pageInfo.page?.avatar}`}
+                    src={`http://localhost:4002/${item?.avatar}`}
                     alt="avatar"
                     className="w-16 h-16 rounded-full object-cover"
                   />
@@ -291,9 +291,9 @@ export default function profileContent({ pageID }) {
                 href={`/profile/${item._id}`}
                 className="flex items-center gap-x-4  pt-8"
               >
-                {pageInfo.page?.avatar ? (
+                {item.avatar ? (
                   <img
-                    src={`http://localhost:4002/${pageInfo.page?.avatar}`}
+                    src={`http://localhost:4002/${item?.avatar}`}
                     alt="avatar"
                     className="w-16 h-16 rounded-full object-cover"
                   />
